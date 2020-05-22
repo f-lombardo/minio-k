@@ -1,4 +1,4 @@
-# Minio-k: a Kotlin example client for MinIO
+# Minio-k: an example Kotlin client for MinIO
 
 This is a simple example of using [MinIO](https://min.io/) client libraries in Kotlin
 
