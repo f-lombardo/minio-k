@@ -7,21 +7,20 @@ import io.minio.MinioClient
 import java.io.File
 
 
-fun hostConfigurationFromEnv(): HostConfiguration? {
+fun hostConfigurationFromEnv(): MinioHostConfiguration? {
     val endPoint = System.getenv("endpoint") ?: return null
     val accessKey = System.getenv("accessKey") ?: return null
     val secretKey = System.getenv("secretKey") ?: return null
-    return HostConfiguration(endPoint, accessKey, secretKey)
+    return MinioHostConfiguration(endPoint, accessKey, secretKey)
 }
 
-private fun String.hostConfigurationFromFile(): HostConfiguration? {
+private fun String.hostConfigurationFromFile(): MinioHostConfiguration? {
     val fileName = System.getProperty("user.home") + "/mc/config.json"
     val json = File(fileName).readText(Charsets.UTF_8)
     return Gson()
             .fromJson(json, MinioJSonConfig::class.java)
             ?.hosts
             ?.get(this)
-            ?.toHostConfiguration()
 }
 
 data class MinioCommandParameters(val configurationName: String?, val bucketName: String, val objectName: String, val localFileName: String)
